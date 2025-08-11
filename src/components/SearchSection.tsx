@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { RecommendedSection } from "./RecommendedSection"
 
 export function SearchSection() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -68,11 +69,7 @@ export function SearchSection() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-lg font-semibold">Recommended for you</h3>
-        </div>
-      </div>
+      <RecommendedSection />
     </div>
   )
 }

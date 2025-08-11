@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { FileText, Eye, Hash, Tag, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { DocumentDetails } from "./DocumentDetails"
 
 interface DocumentCardProps {
   title: string
@@ -26,6 +28,16 @@ export function DocumentCard({
   tags,
   successRate
 }: DocumentCardProps) {
+  const [showDetails, setShowDetails] = useState(false)
+  
+  const mockDocumentDetails = {
+    title,
+    summary: "Auto-generated comprehensive summary of document contents...",
+    keyEntities: ["Sarah Johnson", "Q3 2024", "Revenue", "Expenses", "Growth Rate"],
+    relatedDocuments: ["Q2 2024 Report", "Budget Allocation", "Sales Dashboard"],
+    auditTrail: "Created by Sarah Johnson, Modified 3 times, Last accessed by Mike Chen"
+  }
+  
   const getTypeColor = (type: string) => {
     switch (type.toLowerCase()) {
       case 'pdf':
@@ -40,71 +52,79 @@ export function DocumentCard({
   }
 
   return (
-    <Card className="h-full hover:shadow-lg transition-shadow duration-200">
-      <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-muted-foreground" />
-            <Badge variant="outline" className={getTypeColor(type)}>
-              {type.toUpperCase()}
-            </Badge>
+    <>
+      <Card className="h-full hover:shadow-lg transition-shadow duration-200 cursor-pointer" onClick={() => setShowDetails(true)}>
+        <CardHeader className="pb-3">
+          <div className="flex items-start justify-between">
+            <div className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-muted-foreground" />
+              <Badge variant="outline" className={getTypeColor(type)}>
+                {type.toUpperCase()}
+              </Badge>
+            </div>
+            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
           </div>
-          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </div>
-        <h3 className="font-semibold text-sm leading-tight">{title}</h3>
-      </CardHeader>
-      
-      <CardContent className="pb-3">
-        <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
-          {description}
-        </p>
+          <h3 className="font-semibold text-sm leading-tight">{title}</h3>
+        </CardHeader>
         
-        <div className="space-y-2">
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-            <span>{author}</span>
-            <span>{date}</span>
-            <span>{size}</span>
-            <div className="flex items-center gap-1">
-              <Eye className="h-3 w-3" />
-              <span>{views} views</span>
-            </div>
-          </div>
+        <CardContent className="pb-3">
+          <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+            {description}
+          </p>
           
-          <div className="flex flex-wrap gap-1">
-            {tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs px-2 py-0">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      </CardContent>
-      
-      <CardFooter className="pt-0">
-        <div className="flex w-full gap-2">
-          <Button variant="ghost" size="sm" className="flex-1 h-8">
-            <Eye className="mr-1 h-3 w-3" />
-            View
-          </Button>
-          <Button variant="ghost" size="sm" className="flex-1 h-8">
-            <Hash className="mr-1 h-3 w-3" />
-            Summarize
-          </Button>
-          <Button variant="ghost" size="sm" className="flex-1 h-8">
-            <Tag className="mr-1 h-3 w-3" />
-            Tag
-          </Button>
-          {successRate && (
-            <div className="flex items-center">
-              <Badge variant="outline" className="text-xs bg-success/10 text-success border-success/20">
-                {successRate}%
-              </Badge>
+          <div className="space-y-2">
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <span>{author}</span>
+              <span>{date}</span>
+              <span>{size}</span>
+              <div className="flex items-center gap-1">
+                <Eye className="h-3 w-3" />
+                <span>{views} views</span>
+              </div>
             </div>
-          )}
-        </div>
-      </CardFooter>
-    </Card>
+            
+            <div className="flex flex-wrap gap-1">
+              {tags.map((tag, index) => (
+                <Badge key={index} variant="secondary" className="text-xs px-2 py-0">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </CardContent>
+        
+        <CardFooter className="pt-0">
+          <div className="flex w-full gap-2">
+            <Button variant="ghost" size="sm" className="flex-1 h-8">
+              <Eye className="mr-1 h-3 w-3" />
+              View
+            </Button>
+            <Button variant="ghost" size="sm" className="flex-1 h-8">
+              <Hash className="mr-1 h-3 w-3" />
+              Summarize
+            </Button>
+            <Button variant="ghost" size="sm" className="flex-1 h-8">
+              <Tag className="mr-1 h-3 w-3" />
+              Tag
+            </Button>
+            {successRate && (
+              <div className="flex items-center">
+                <Badge variant="outline" className="text-xs bg-success/10 text-success border-success/20">
+                  {successRate}%
+                </Badge>
+              </div>
+            )}
+          </div>
+        </CardFooter>
+      </Card>
+      
+      <DocumentDetails 
+        isOpen={showDetails} 
+        onClose={() => setShowDetails(false)} 
+        document={mockDocumentDetails} 
+      />
+    </>
   )
 }
