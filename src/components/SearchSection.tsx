@@ -1,14 +1,12 @@
 import { useState } from "react"
-import { Search, Link2, Upload } from "lucide-react"
+import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 
 export function SearchSection() {
   const [searchQuery, setSearchQuery] = useState("")
-  const [sharepointUrl, setSharepointUrl] = useState("")
 
   return (
     <div className="space-y-6">
@@ -73,44 +71,6 @@ export function SearchSection() {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold">Recommended for you</h3>
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Upload className="mr-2 h-4 w-4" />
-            Upload
-          </Button>
-          
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline" size="sm">
-                <Link2 className="mr-2 h-4 w-4" />
-                Upload via URL
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Upload from SharePoint URL</DialogTitle>
-                <DialogDescription>
-                  Enter a SharePoint URL to import documents directly.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="sharepoint-url">SharePoint URL</Label>
-                  <Input
-                    id="sharepoint-url"
-                    placeholder="https://company.sharepoint.com/sites/..."
-                    value={sharepointUrl}
-                    onChange={(e) => setSharepointUrl(e.target.value)}
-                  />
-                </div>
-                <div className="flex justify-end gap-2">
-                  <Button variant="outline">Cancel</Button>
-                  <Button>Import Documents</Button>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog>
         </div>
       </div>
     </div>
