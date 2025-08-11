@@ -1,17 +1,14 @@
-import { useState } from "react"
-import { Database, Plus, Upload, User, Settings, Link2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { ThemeSelector } from "./ThemeSelector"
-
+import { useState } from "react";
+import { Database, Plus, Upload, User, Settings, Link2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ThemeSelector } from "./ThemeSelector";
 export function Header() {
-  const [sharepointUrl, setSharepointUrl] = useState("")
-
-  return (
-    <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  const [sharepointUrl, setSharepointUrl] = useState("");
+  return <header className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center px-6">
         <div className="flex items-center space-x-2">
           <Database className="h-6 w-6 text-primary" />
@@ -69,12 +66,7 @@ export function Header() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="sharepoint-url">SharePoint URL</Label>
-                  <Input
-                    id="sharepoint-url"
-                    placeholder="https://company.sharepoint.com/sites/..."
-                    value={sharepointUrl}
-                    onChange={(e) => setSharepointUrl(e.target.value)}
-                  />
+                  <Input id="sharepoint-url" placeholder="https://company.sharepoint.com/sites/..." value={sharepointUrl} onChange={e => setSharepointUrl(e.target.value)} />
                 </div>
                 <div className="flex justify-end gap-2">
                   <Button variant="outline">Cancel</Button>
@@ -84,9 +76,7 @@ export function Header() {
             </DialogContent>
           </Dialog>
           
-          <Badge variant="destructive" className="h-5 w-5 rounded-full p-0 text-xs">
-            1
-          </Badge>
+          
           <ThemeSelector />
           <Button variant="ghost" size="sm" className="relative h-8 w-8 rounded-full">
             <User className="h-4 w-4" />
@@ -96,6 +86,5 @@ export function Header() {
           </Button>
         </div>
       </div>
-    </header>
-  )
+    </header>;
 }

@@ -9,10 +9,12 @@ import {
 import { useTheme } from "./ThemeProvider"
 
 const themes = [
-  { name: "Dark", value: "dark" as const, color: "bg-slate-900" },
   { name: "Light", value: "light" as const, color: "bg-slate-50" },
+  { name: "Dark", value: "dark" as const, color: "bg-slate-900" },
   { name: "Blue", value: "blue" as const, color: "bg-blue-600" },
   { name: "Green", value: "green" as const, color: "bg-green-600" },
+  { name: "Orange", value: "Orange" as const, color: "bg-orange-600"},
+  
 ]
 
 export function ThemeSelector() {
